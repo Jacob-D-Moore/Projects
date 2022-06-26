@@ -1,9 +1,10 @@
-// //Tip Calc
+document.querySelector(".calculate").addEventListener("click", function () {
+  let bill = document.querySelector(".bill-total").value;
+  let tipPercent = document.querySelector(".tip-amount").value;
+  let numPeople = document.querySelector(".total-people").value;
+  let total = bill * (tipPercent / 100) + bill;
 
-const billTotal = document.querySelector(".bill-totat");
-const tipPercent = document.querySelector(".tip-amount");
-const totalPeople = document.querySelector(".total-people");
-const totalPerPerson = document.querySelector(".each");
-const total = (billTotal * tipPercent) / totalPeople;
+  document.querySelector(".tip").textContent = total;
+});
 
-const billTotal = document.getElementsByClassName(".bill-total");
+// (billAmt * serviceQual) / numOfPeople;
