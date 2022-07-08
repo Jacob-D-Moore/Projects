@@ -1,6 +1,6 @@
 .container {
-  margin-bottom: auto;
-  margin-top: 15%;
+  margin-bottom: 10px;
+  margin-top: 5%;
   margin-right: auto;
   margin-left: auto;
   width: 30vh;
@@ -10,15 +10,13 @@
 }
 
 h1 {
+  width: 30vh;
+  margin: 0 auto;
   text-align: center;
-  width: 20vw;
+  margin-top: 50px;
   border-radius: 10px;
   border: 1px solid red;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translateX(-50%) translateY(-650%);
-  border-radius: 20px;
+  padding: 10px;
 }
 
 .tip {
