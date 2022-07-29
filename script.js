@@ -16,9 +16,13 @@ let calcTip = function () {
   } else {
     document.querySelector(".each").style.display = "block";
   }
-
-  let total = (bill * (tipPercent / 100) + bill) / numPeople;
+  let tipTotal = Number(bill * (tipPercent / 100));
+  tipTotal = tipTotal.toFixed(2);
+  console.log(tipTotal);
+  let total = (Number(tipTotal) + Number(bill)) / numPeople;
+  console.log(total);
   total = total.toFixed(2);
-  document.querySelector(".tip").textContent = total;
+  document.querySelector(".total-tip").textContent = tipTotal;
+  document.querySelector(".tip-with-bill").textContent = total;
 };
 document.querySelector(".calculate").onclick = calcTip;
