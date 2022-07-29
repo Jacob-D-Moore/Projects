@@ -42,7 +42,13 @@ h1 {
   padding: 10px;
 }
 
-.tip {
+.total-tip {
+  text-align: right;
+  color: red;
+  font-size: xx-large;
+}
+
+.tip-with-bill {
   text-align: right;
   color: red;
   font-size: xx-large;
