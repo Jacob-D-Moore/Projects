@@ -5,7 +5,7 @@ let calcTip = function () {
   let tipPercent = Number(document.querySelector(".tip-amount").value);
   let numPeople = Number(document.querySelector(".total-people").value);
 
-  if (bill === "" && tipPercent === "") {
+  if (bill == "" && tipPercent == "") {
     alert("Please enter valid values.");
     return;
   }
