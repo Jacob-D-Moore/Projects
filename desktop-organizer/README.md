@@ -34,3 +34,7 @@ You can run it again at any time. It only adds missing folders and never changes
 3. When something is finished, move it to **99 Archive**. Don't delete it.
 
 To change the folders, edit the `folders=( … )` list at the top of the script.
+
+## Not sure what needs organizing?
+
+Run `whats-on-my-mac.command` the same way. It is **read-only**: it lists what's in your Desktop, Downloads and Documents (file counts, file types, loose items, biggest files). It saves the list to `whats-on-my-mac.txt` on your Desktop and copies it to your clipboard, so you can paste it to Claude and get a sorting plan.
