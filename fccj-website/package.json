@@ -1,0 +1,24 @@
+{
+  "name": "fccj-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "First Christian Church Jonesboro website + admin CMS on Cloudflare Workers",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "db:migrate:local": "wrangler d1 migrations apply fccj-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply fccj-db --remote",
+    "deploy": "wrangler d1 migrations apply fccj-db --remote && wrangler deploy",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "hono": "^4.13.12",
+    "marked": "^18.0.14",
+    "qrcode-generator": "^2.0.4"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260930.2",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.145.0"
+  }
+}

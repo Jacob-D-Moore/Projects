@@ -1,0 +1,29 @@
+name = "fccj-website"
+main = "src/index.tsx"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Static files (CSS, JS, favicon) served directly from Cloudflare's edge.
+[assets]
+directory = "./public"
+
+# Database for all site content. After `wrangler d1 create fccj-db`,
+# paste the database_id it prints below.
+[[d1_databases]]
+binding = "DB"
+database_name = "fccj-db"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+# Storage for uploaded images and PDFs (bulletins, sermon notes).
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "fccj-media"
+
+[vars]
+# Set to "true" only for local development over plain http://
+DEV_INSECURE_COOKIES = "false"
+
+# Secrets (set with `wrangler secret put NAME`, never commit them):
+#   SETUP_TOKEN       - one-time token required to create the first admin account
+#   TURNSTILE_SITE_KEY / TURNSTILE_SECRET - optional Cloudflare Turnstile anti-spam on the contact form
