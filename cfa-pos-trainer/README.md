@@ -4,7 +4,9 @@ A practice register for learning to ring orders at the front counter or drive-th
 
 ## Run it
 
-Open `index.html` in Chrome, Edge, Safari or Firefox. You can double-click the file. It also works on a tablet if you copy the folder over.
+**Easiest:** download `POS-Trainer.html` (everything in one file) and double-click it. It opens in Chrome, Edge, Safari or Firefox and works offline. On a phone or tablet, save the file and open it in the browser.
+
+Or open `index.html` in a full copy of this folder. `POS-Trainer.html` is a bundled copy of `index.html`, `styles.css`, `menu.js` and `app.js`. If you edit those files, rebuild the bundle or edit `POS-Trainer.html` directly.
 
 ## Modes
 
