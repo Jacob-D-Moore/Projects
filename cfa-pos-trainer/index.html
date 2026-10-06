@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>POS Trainer</title>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">POS Trainer</div>
+      <div class="mode-switch" role="tablist">
+        <button class="mode-btn active" data-mode="practice">Practice</button>
+        <button class="mode-btn" data-mode="training">Training</button>
+      </div>
+      <label class="difficulty training-only">
+        Level
+        <select id="difficulty">
+          <option value="easy">Easy</option>
+          <option value="normal" selected>Normal</option>
+          <option value="rush">Lunch Rush</option>
+        </select>
+      </label>
+      <div class="stats training-only" id="stats"></div>
+      <div class="spacer"></div>
+      <div class="clock" id="clock"></div>
+      <button class="ghost-btn" id="settings-btn" title="Settings">⚙</button>
+    </header>
+
+    <section class="customer training-only" id="customer">
+      <div class="customer-avatar" id="customer-avatar">🙂</div>
+      <div class="bubble">
+        <div class="bubble-meta" id="customer-meta"></div>
+        <div class="bubble-text" id="customer-text">
+          Press <b>Next Guest</b> to start.
+        </div>
+      </div>
+      <div class="customer-actions">
+        <div class="timer" id="timer">0:00</div>
+        <button class="btn" id="next-guest">Next Guest</button>
+        <button class="btn ghost" id="hint-btn">Hint</button>
+      </div>
+    </section>
+
+    <main class="pos">
+      <aside class="ticket">
+        <div class="ticket-head">
+          <div>
+            Order <b id="order-num">#1</b>
+          </div>
+          <div class="dest" id="dest-buttons">
+            <button data-dest="dinein">Dine In</button>
+            <button data-dest="carryout">Carry Out</button>
+            <button data-dest="drivethru">Drive-Thru</button>
+          </div>
+        </div>
+        <ol class="lines" id="lines"></ol>
+        <div class="line-actions">
+          <button class="btn small" id="qty-down" disabled>− Qty</button>
+          <button class="btn small" id="qty-up" disabled>+ Qty</button>
+          <button class="btn small" id="modify-line" disabled>Modify</button>
+          <button class="btn small danger" id="void-line" disabled>Void</button>
+        </div>
+        <div class="totals">
+          <div><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+          <div><span>Tax</span><span id="tax">$0.00</span></div>
+          <div class="grand"><span>Total</span><span id="total">$0.00</span></div>
+        </div>
+        <div class="ticket-actions">
+          <button class="btn ghost" id="clear-order">Void Order</button>
+          <button class="btn primary big" id="pay-btn" disabled>Pay</button>
+        </div>
+      </aside>
+
+      <section class="menu">
+        <nav class="cats" id="cats"></nav>
+        <div class="grid" id="grid"></div>
+      </section>
+    </main>
+
+    <!-- Item builder -->
+    <div class="modal" id="builder" hidden>
+      <div class="modal-card wide">
+        <div class="modal-head">
+          <h2 id="b-title"></h2>
+          <button class="ghost-btn" data-close>✕</button>
+        </div>
+        <div class="modal-body" id="b-body"></div>
+        <div class="modal-foot">
+          <div class="qty">
+            <button class="btn small" id="b-qty-down">−</button>
+            <span id="b-qty">1</span>
+            <button class="btn small" id="b-qty-up">+</button>
+          </div>
+          <div class="b-price" id="b-price"></div>
+          <button class="btn ghost" data-close>Cancel</button>
+          <button class="btn primary" id="b-add">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment -->
+    <div class="modal" id="payment" hidden>
+      <div class="modal-card">
+        <div class="modal-head">
+          <h2>Tender</h2>
+          <button class="ghost-btn" data-close>✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="pay-total">Amount due <b id="p-due"></b></div>
+          <div class="pay-methods">
+            <button class="btn" data-method="card">Card</button>
+            <button class="btn" data-method="cash">Cash</button>
+            <button class="btn" data-method="gift">Gift Card</button>
+          </div>
+          <div id="cash-panel" hidden>
+            <div class="cash-display">Tendered <b id="p-tendered">$0.00</b></div>
+            <div class="quick-cash" id="quick-cash"></div>
+            <div class="keypad" id="keypad"></div>
+          </div>
+          <div class="change" id="p-change" hidden></div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn ghost" data-close>Back</button>
+          <button class="btn primary" id="p-complete" disabled>Complete</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result / receipt -->
+    <div class="modal" id="result" hidden>
+      <div class="modal-card">
+        <div class="modal-head">
+          <h2 id="r-title"></h2>
+        </div>
+        <div class="modal-body" id="r-body"></div>
+        <div class="modal-foot">
+          <button class="btn primary" id="r-next">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings -->
+    <div class="modal" id="settings" hidden>
+      <div class="modal-card">
+        <div class="modal-head">
+          <h2>Settings</h2>
+          <button class="ghost-btn" data-close>✕</button>
+        </div>
+        <div class="modal-body settings-body">
+          <label>Sales tax rate (%)
+            <input type="number" id="tax-input" step="0.01" min="0" max="20" />
+          </label>
+          <label class="check">
+            <input type="checkbox" id="speak-toggle" />
+            Read guest orders out loud (text-to-speech)
+          </label>
+          <button class="btn danger" id="reset-stats">Reset training stats</button>
+          <p class="muted">
+            Prices and combo numbers are approximate. Edit <code>menu.js</code>
+            to match your store's register.
+          </p>
+        </div>
+        <div class="modal-foot">
+          <button class="btn primary" data-close>Done</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="menu.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
